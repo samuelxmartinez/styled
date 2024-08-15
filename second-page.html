@@ -1,6 +1,9 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <link href='https://cdn.jsdelivr.net/npm/fullcalendar@6.1.4/main.min.css' rel='stylesheet' />
+    <script src='https://cdn.jsdelivr.net/npm/fullcalendar@6.1.4/main.min.js'></script>
+
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Second Page</title>
@@ -10,5 +13,34 @@
     <h1>This is the Second Page</h1>
     <p>Welcome to the second page of my website.</p>
     <a href="index.html">Back to Home</a>
+    
+    <div id='calendar'></div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+          var calendarEl = document.getElementById('calendar');
+      
+          var calendar = new FullCalendar.Calendar(calendarEl, {
+            initialView: 'dayGridMonth',
+            selectable: true,
+            selectHelper: true,
+            events: [],
+            select: function(info) {
+              var title = prompt('Enter Appointment Title:');
+              if (title) {
+                calendar.addEvent({
+                  title: title,
+                  start: info.startStr,
+                  end: info.endStr,
+                  allDay: info.allDay
+                });
+              }
+              calendar.unselect();
+            }
+          });
+      
+          calendar.render();
+        });
+    </script>
 </body>
 </html>

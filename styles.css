@@ -15,3 +15,8 @@ p {
     text-align: center;
     color: #666;
 }
+#calendar {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 20px;
+}
