@@ -1,23 +1,29 @@
 document.addEventListener('DOMContentLoaded', function() {
     var calendarEl = document.getElementById('calendar');
 
-    var calendar = new FullCalendar.Calendar(calendarEl, {
-        initialView: 'dayGridMonth',
-        selectable: true,
-        events: [], // You can add events here
-        select: function(info) {
-            var title = prompt('Enter Appointment Title:');
-            if (title) {
-                calendar.addEvent({
-                    title: title,
-                    start: info.startStr,
-                    end: info.endStr,
-                    allDay: info.allDay
-                });
-            }
-            calendar.unselect();
+    // Preset appointments
+    var presetAppointments = [
+        {
+            title: 'Consultation',
+            duration: '00:30:00'
+        },
+        {
+            title: 'Haircut',
+            duration: '01:00:00'
+        },
+        {
+            title: 'Shave',
+            duration: '00:30:00'
         }
-    });
+    ];
 
-    calendar.render();
-});
+    var calendar = new FullCalendar.Calendar(calendarEl, {
+        initialView: 'dayGridMonth',  // Displays the month view
+        selectable: true,
+        events: [], // Initially, no events
+        select: function(info) {
+            var options = presetAppointments.map(function(appointment, index) {
+                return `${index + 1}. ${appointment.title} (${appointment.duration})`;
+            }).join("\n");
+
+      
